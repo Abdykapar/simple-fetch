@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <HelloWorld :todos="todos" />
   </div>
 </template>
 
@@ -13,6 +12,21 @@ export default {
   components: {
     HelloWorld,
   },
+  data() {
+    return {
+      todos: []
+    }
+  },
+  mounted () {
+    this.fetchData()
+  },
+  methods: {
+    fetchData () {
+      fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res => res.json())
+      .then(json => this.todos = json)
+    }
+  }
 };
 </script>
 
